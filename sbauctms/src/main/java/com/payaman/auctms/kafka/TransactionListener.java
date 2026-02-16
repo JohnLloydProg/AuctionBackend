@@ -1,6 +1,6 @@
 package com.payaman.auctms.kafka;
 
-import com.payaman.auctms.serviceimpl.TransactionConsumerService;
+import com.payaman.auctms.service.TransactionConsumerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

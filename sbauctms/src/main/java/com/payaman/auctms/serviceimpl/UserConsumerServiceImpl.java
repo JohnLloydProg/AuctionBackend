@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserConsumerServiceImpl implements UserConsumerService {
+public class UserConsumerServiceImpl implements com.payaman.auctms.service.UserConsumerService {
 
     private final UserDataRepository userRepository;
     private final ObjectMapper objectMapper;

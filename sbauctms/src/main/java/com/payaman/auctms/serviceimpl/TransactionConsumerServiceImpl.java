@@ -3,6 +3,7 @@ package com.payaman.auctms.serviceimpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payaman.auctms.entity.TransactionData;
 import com.payaman.auctms.repository.TransactionDataRepository;
+import com.payaman.auctms.service.TransactionConsumerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

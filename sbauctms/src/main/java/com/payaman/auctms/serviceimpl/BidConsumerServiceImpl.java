@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payaman.auctms.entity.BidData;
 import com.payaman.auctms.model.BidRequest;
 import com.payaman.auctms.repository.BidDataRepository;
+import com.payaman.auctms.service.BidConsumerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
