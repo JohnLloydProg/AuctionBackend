@@ -1,7 +1,6 @@
 package com.payaman.auctms.entity;
 
 import lombok.Data;
-import jakarta.persistence.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
