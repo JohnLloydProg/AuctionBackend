@@ -19,8 +19,6 @@ public class BidProducerService {
         try {
             String message = objectMapper.writeValueAsString(bidRequest);
 
-            // We use auctionId as the Key to ensure all bids for the same item
-            // go to the same partition (preserving order).
             kafkaTemplate.send(TOPIC_BIDS, bidRequest.getAuctionId(), message);
 
         } catch (Exception e) {

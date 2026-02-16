@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionDataRepository extends JpaRepository<TransactionData, String> {
-    // Custom query to find existing bid for composite key logic if needed
-    // BidData findByUserIdAndAuctionId(String userId, String auctionId);
+
 }

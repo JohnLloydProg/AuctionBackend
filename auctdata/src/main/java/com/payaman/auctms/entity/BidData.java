@@ -3,8 +3,6 @@ package com.payaman.auctms.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-/* or javax.persistence depending on Spring Boot version */
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -1,7 +1,6 @@
 package com.payaman.auctms.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.Date;
 public class TransactionData {
 
     @Id
-    private String transactionId; // You might generate this via UUID
+    private String transactionId;
 
     private String auctionId;
     private String buyerId;

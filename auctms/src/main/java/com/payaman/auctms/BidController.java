@@ -14,9 +14,7 @@ public class BidController {
 
     @PostMapping
     public ResponseEntity<String> placeBid(@RequestBody BidRequest request) {
-        // Validation logic can go here (e.g., check if price > 0)
 
-        // Async processing: Send to Kafka
         bidProducerService.sendBid(request);
 
         return ResponseEntity.accepted().body("Bid accepted for processing");
