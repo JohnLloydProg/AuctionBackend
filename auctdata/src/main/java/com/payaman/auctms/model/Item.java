@@ -6,6 +6,9 @@ import java.util.Date;
 public class Item{
 	private int id;
 	private String name;
+	private String description;
+	private User seller;
+	private Category category;
 	private Date lastUpdated;
 	private Date created;
 }

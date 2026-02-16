@@ -5,7 +5,6 @@ import java.util.Date;
 @Data
 public class Auction{
 	private int id;
-	private int auctionId;
 	private int itemId;
 	private float startingPrice;
 	private float currentPrice;

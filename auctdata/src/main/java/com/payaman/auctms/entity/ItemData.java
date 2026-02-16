@@ -14,6 +14,8 @@ public class ItemData {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
+	private String description;
+	private int userId;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)

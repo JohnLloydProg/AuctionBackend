@@ -8,7 +8,7 @@
     <artifactId>sbauctms</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.gabriel</groupId>
+            <groupId>com.payaman</groupId>
             <artifactId>auctdata</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
