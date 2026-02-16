@@ -13,7 +13,13 @@ public class AuctionData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String name;
+	private int itemId;
+
+	private float startingPrice;
+	private float currentPrice;
+	private Date startTime;
+	private Date endTime;
+	private String status;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)

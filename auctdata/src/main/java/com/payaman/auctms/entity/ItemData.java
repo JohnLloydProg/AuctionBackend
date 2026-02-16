@@ -15,7 +15,8 @@ public class ItemData {
 	private int id;
 	private String name;
 	private String description;
-	private int userId;
+	private int sellerId;
+	private int categoryId;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
