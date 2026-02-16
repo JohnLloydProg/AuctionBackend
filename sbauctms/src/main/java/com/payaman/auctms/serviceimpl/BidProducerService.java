@@ -1,4 +1,4 @@
-package com.payaman.auctms.service;
+package com.payaman.auctms.serviceimpl;
 
 import com.payaman.auctms.model.BidRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;

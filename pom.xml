@@ -15,7 +15,6 @@
     <modules>
         <module>auctdata</module>
         <module>sbauctms</module>
-        <module>auctms</module>
     </modules>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
