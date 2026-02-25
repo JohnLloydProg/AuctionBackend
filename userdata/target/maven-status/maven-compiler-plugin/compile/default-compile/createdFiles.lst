@@ -1,0 +1,6 @@
+com\payaman\userms\entity\UserData.class
+com\payaman\userms\repository\UserDataRepository.class
+com\payaman\userms\model\User.class
+com\payaman\userms\transform\TransformUserService.class
+com\payaman\userms\service\UserConsumeService.class
+com\payaman\userms\service\UserService.class
