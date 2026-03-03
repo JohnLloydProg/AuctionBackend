@@ -1,0 +1,10 @@
+entity\Category.class
+repository\ItemRepository.class
+entity\Item.class
+controller\CategoryController.class
+controller\ItemController.class
+repository\CategoryRepository.class
+service\CategoryService.class
+dto\CategoryDTO.class
+service\ItemService.class
+dto\ItemDTO.class
