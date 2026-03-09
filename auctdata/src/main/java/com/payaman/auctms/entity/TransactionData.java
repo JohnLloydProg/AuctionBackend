@@ -11,12 +11,11 @@ import java.util.Date;
 public class TransactionData {
 
     @Id
-    private String transactionId;
+    private int id;
 
-    private String auctionId;
-    private String buyerId;
-    private String sellerId;
-    private BigDecimal finalAmount;
+    private int auctionId;
+    private int buyerId;
+    private float finalAmount;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

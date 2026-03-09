@@ -1,21 +1,22 @@
 package com.payaman.auctms.serviceimpl;
 import com.payaman.auctms.entity.AuctionData;
-import com.payaman.auctms.entity.CategoryData;
+import com.payaman.auctms.entity.BidData;
 import com.payaman.auctms.entity.ItemData;
+import com.payaman.auctms.entity.UserData;
 import com.payaman.auctms.model.Auction;
-import com.payaman.auctms.model.Category;
+import com.payaman.auctms.model.BidRequest;
 import com.payaman.auctms.model.Item;
+import com.payaman.auctms.model.User;
 import com.payaman.auctms.repository.AuctionDataRepository;
-import com.payaman.auctms.repository.CategoryDataRepository;
+import com.payaman.auctms.repository.BidDataRepository;
 import com.payaman.auctms.repository.ItemDataRepository;
+import com.payaman.auctms.repository.UserDataRepository;
 import com.payaman.auctms.service.AuctionService;
-import com.payaman.auctms.transform.TransformAuctionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 @Service
 public class AuctionServiceImpl implements AuctionService {
@@ -28,18 +29,27 @@ public class AuctionServiceImpl implements AuctionService {
 	ItemDataRepository itemDataRepository;
 
 	@Autowired
-	CategoryDataRepository categoryDataRepository;
+	UserDataRepository userDataRepository;
+
+	@Autowired
+	BidDataRepository bidDataRepository;
 
 	public Item transform(ItemData itemData) {
 		Item item = new Item();
 		item.setId(itemData.getId());
 		item.setName(itemData.getName());
 		item.setDescription(itemData.getDescription());
-		item.setSellerId(itemData.getSellerId());
-		Optional<CategoryData> optional = categoryDataRepository.findById(itemData.getCategoryId());
+		Optional<UserData> optional = userDataRepository.findById(itemData.getSellerId());
 		if (optional.isPresent()) {
-			Category category = new Category();
-			item.setCategory(category);
+			UserData userData = optional.get();
+			User user = new User();
+			user.setUserId(userData.getUserId());
+			user.setEmail(userData.getEmail());
+			user.setStatus(userData.getStatus());
+			user.setRole(userData.getRole());
+			user.setPasswordHash(userData.getPasswordHash());
+			user.setUsername(userData.getUsername());
+			item.setSeller(user);
 		}
 		return item;
 	}
@@ -48,7 +58,7 @@ public class AuctionServiceImpl implements AuctionService {
 		AuctionData auctionData = new AuctionData();
 		auctionData.setId(auction.getId());
 		auctionData.setStartingPrice(auction.getStartingPrice());
-		auctionData.setCurrentPrice(auction.getCurrentPrice());
+		auctionData.setCurrentBidId(auction.getCurrentBid().getId());
 		auctionData.setStartTime(auction.getStartTime());
 		auctionData.setEndTime(auction.getEndTime());
 		auctionData.setStatus(auction.getStatus());
@@ -56,11 +66,22 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionData;
 	}
 
+	public BidRequest transform(BidData bidData) {
+		BidRequest bidRequest = new BidRequest();
+		bidRequest.setUserId(bidData.getUserId());
+		bidRequest.setOfferedPrice(bidData.getOfferedPrice());
+		bidRequest.setId(bidData.getId());
+		return bidRequest;
+	}
+
 	public Auction transform(AuctionData auctionData){;
 		Auction auction = new Auction();
 		auction.setId(auctionData.getId());
 		auction.setStartingPrice(auctionData.getStartingPrice());
-		auction.setCurrentPrice(auctionData.getCurrentPrice());
+		Optional<BidData> optionalBidData = bidDataRepository.findById(auctionData.getCurrentBidId());
+		if (optionalBidData.isPresent()) {
+			auction.setCurrentBid(transform(optionalBidData.get()));
+		}
 		auction.setStartTime(auctionData.getStartTime());
 		auction.setEndTime(auctionData.getEndTime());
 		auction.setStatus(auctionData.getStatus());
@@ -71,6 +92,8 @@ public class AuctionServiceImpl implements AuctionService {
 		return auction;
 	}
 
+
+
 	@Override
 	public Auction[] getAll() {
 		List<AuctionData> auctionsData = new ArrayList<>();
@@ -80,7 +103,9 @@ public class AuctionServiceImpl implements AuctionService {
 		while(it.hasNext()) {
 			AuctionData auctionData = it.next();
 			Auction auction = this.transform(auctionData);
-			auctions.add(auction);
+			if (auction.getStatus().equals("Pending")) {
+				auctions.add(auction);
+			}
 		}
 		Auction[] array = new Auction[auctions.size()];
 		for  (int i=0; i<auctions.size(); i++){

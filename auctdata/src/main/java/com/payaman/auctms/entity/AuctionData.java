@@ -16,7 +16,7 @@ public class AuctionData {
 	private int itemId;
 
 	private float startingPrice;
-	private float currentPrice;
+	private int currentBidId;
 	private Date startTime;
 	private Date endTime;
 	private String status;

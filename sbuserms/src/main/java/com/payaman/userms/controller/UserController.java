@@ -1,4 +1,5 @@
 package com.payaman.userms.controller;
+import com.payaman.userms.kafka.UserProducer;
 import com.payaman.userms.model.User;
 import com.payaman.userms.service.UserService;
 import org.slf4j.Logger;
@@ -13,6 +14,14 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
+
+    private UserProducer userProducer;
+
+    public UserController(UserProducer userProducer) {
+        this.userProducer = userProducer;
+    }
+
+
     @GetMapping("/api/user")
     public ResponseEntity<?> listUser(){
         HttpHeaders headers = new HttpHeaders();
@@ -25,7 +34,7 @@ public class UserController {
         }
         return response;
     }
-    @PutMapping("api/user")
+    @PostMapping("api/user")
     public ResponseEntity<?> add(@RequestBody User user){
         logger.info("Input >> " + user.toString());
         HttpHeaders headers = new HttpHeaders();
@@ -33,6 +42,7 @@ public class UserController {
         try{
             User newUser = userService.create(user);
             logger.info("created user >> " + newUser.toString());
+            this.userProducer.sendMessage(newUser);
             response = ResponseEntity.ok(newUser);
         } catch (Exception ex){
             logger.error("Failed to retrieve user with id : {}", ex.getMessage(), ex);
@@ -40,13 +50,29 @@ public class UserController {
         }
         return response;
     }
-    @PostMapping("api/user")
+
+    @PostMapping("api/login")
+    public ResponseEntity<?> add(@RequestBody String email, @RequestBody String password){
+        HttpHeaders headers = new HttpHeaders();
+        ResponseEntity<?> response;
+        try{
+            User newUser = userService.login(email, password);
+            response = ResponseEntity.ok(newUser);
+        } catch (Exception ex){
+            logger.error("Failed to retrieve user with id : {}", ex.getMessage(), ex);
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
+        return response;
+    }
+
+    @PutMapping("api/user")
     public ResponseEntity<?> update(@RequestBody User user){
         logger.info("Update Input >> user.toString() ");
         HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try{
             User newUser = userService.update(user);
+            this.userProducer.sendMessage(newUser);
             response = ResponseEntity.ok(user);
         } catch (Exception ex){
             logger.error("Failed to retrieve user with id : {}", ex.getMessage(), ex);

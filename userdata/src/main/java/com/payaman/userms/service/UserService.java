@@ -1,6 +1,7 @@
 package com.payaman.userms.service;
 import com.payaman.userms.model.User;
 public interface UserService {
+    User login(String email, String password) throws Exception;
     User[] getAll() throws Exception;
     User get(Integer id) throws Exception;
     User create(User user) throws Exception;

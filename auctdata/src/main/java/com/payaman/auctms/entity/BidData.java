@@ -8,27 +8,18 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-class BidId implements Serializable {
-    private String userId;
-    private String auctionId;
-}
 
 @Data
 @Entity
 @Table(name = "Bid")
-@IdClass(BidId.class)
 public class BidData {
-
     @Id
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-    @Id
-    private String auctionId;
+    private int userId;
 
-    private BigDecimal offeredPrice;
+    private float offeredPrice;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

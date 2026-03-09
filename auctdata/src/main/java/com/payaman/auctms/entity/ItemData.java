@@ -16,7 +16,6 @@ public class ItemData {
 	private String name;
 	private String description;
 	private int sellerId;
-	private int categoryId;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)

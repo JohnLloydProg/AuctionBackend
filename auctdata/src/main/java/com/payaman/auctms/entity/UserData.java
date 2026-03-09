@@ -12,7 +12,8 @@ public class UserData {
 
     @Id
     @Column(name = "userID")
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userId;
 
     @Column(unique = true, nullable = false)
     private String username;

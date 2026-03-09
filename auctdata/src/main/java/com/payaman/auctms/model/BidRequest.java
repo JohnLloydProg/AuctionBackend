@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 @Data
 public class BidRequest {
-    private String userId;
-    private String auctionId;
-    private BigDecimal offeredPrice;
+    private int id;
+    private int userId;
+    private float offeredPrice;
 }

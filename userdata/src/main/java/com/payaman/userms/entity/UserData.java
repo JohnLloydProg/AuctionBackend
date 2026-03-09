@@ -10,6 +10,7 @@ public class UserData {
 
     @Id
     @Column(name = "userID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
     @Column(unique = true, nullable = false)

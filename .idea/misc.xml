@@ -5,11 +5,17 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/sbauctms/sbinvms/pom.xml" />
+        <option value="$PROJECT_DIR$/sbinvms/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/auctms/pom.xml" />
+        <option value="$PROJECT_DIR$/invendata/pom.xml" />
+        <option value="$PROJECT_DIR$/sbauctms/sbinvms/pom.xml" />
+        <option value="$PROJECT_DIR$/sbinvenms/pom.xml" />
+        <option value="$PROJECT_DIR$/sbinvms/pom.xml" />
       </set>
     </option>
   </component>

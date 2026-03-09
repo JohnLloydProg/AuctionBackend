@@ -7,7 +7,7 @@ public class Auction{
 	private int id;
 	private Item item;
 	private float startingPrice;
-	private float currentPrice;
+	private BidRequest currentBid;
 	private Date startTime;
 	private Date endTime;
 	private String status;

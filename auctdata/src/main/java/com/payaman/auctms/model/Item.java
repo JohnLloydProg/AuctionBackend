@@ -7,6 +7,5 @@ public class Item{
 	private int id;
 	private String name;
 	private String description;
-	private int sellerId;
-	private Category category;
+	private User seller;
 }

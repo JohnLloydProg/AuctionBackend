@@ -9,7 +9,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private String userId;
+    private int userId;
 
     private String username;
     private String email;

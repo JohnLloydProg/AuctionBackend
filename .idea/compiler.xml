@@ -14,13 +14,19 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="auctms" target="17" />
+      <module name="invendata" target="17" />
+      <module name="sbinvenms" target="17" />
+      <module name="sbinvms" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="auctdata" options="-parameters" />
       <module name="auctms" options="-parameters" />
+      <module name="invendata" options="-parameters" />
       <module name="sbauctms" options="-parameters" />
+      <module name="sbinvenms" options="-parameters" />
+      <module name="sbinvms" options="-parameters" />
       <module name="sbuserms" options="-parameters" />
       <module name="userdata" options="-parameters" />
     </option>

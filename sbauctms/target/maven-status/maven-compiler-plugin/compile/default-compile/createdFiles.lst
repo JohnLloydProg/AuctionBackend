@@ -1,4 +1,10 @@
-com\payaman\auctms\kafka\AuctionListener.class
+com\payaman\auctms\controller\ItemController.class
+com\payaman\auctms\controller\TransactionController.class
+com\payaman\auctms\kafka\UserListener.class
+com\payaman\auctms\serviceimpl\TransactionServiceImpl.class
+com\payaman\auctms\serviceimpl\UserConsumerServiceImpl.class
 com\payaman\auctms\serviceimpl\AuctionServiceImpl.class
+com\payaman\auctms\serviceimpl\BidServiceImpl.class
 com\payaman\auctms\AuctionMSApplication.class
+com\payaman\auctms\serviceimpl\ItemServiceImpl.class
 com\payaman\auctms\controller\AuctionController.class

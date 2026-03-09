@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDataRepository extends JpaRepository<UserData, String> {
+public interface UserDataRepository extends JpaRepository<UserData, Integer> {
     // This allows you to perform database operations like .save()
 }

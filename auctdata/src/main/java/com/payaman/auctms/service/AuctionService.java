@@ -1,5 +1,7 @@
 package com.payaman.auctms.service;
 import com.payaman.auctms.model.Auction;
+import com.payaman.auctms.model.BidRequest;
+
 public interface AuctionService {
 	Auction[] getAll() throws Exception;
 	Auction get(Integer id) throws Exception;

@@ -36,6 +36,19 @@ public class UserServiceImpl implements UserService{
         user.setStatus(userData.getStatus());
         return user;
     }
+
+    @Override
+    public User login(String email, String password) throws Exception {
+        List<UserData> userDataList = new ArrayList<>();
+        userDataRepository.findAll().forEach(userDataList::add);
+        for (UserData userData : userDataList) {
+            if (userData.getEmail().equals(email) && userData.getPasswordHash().equals(password)) {
+                return transform(userData);
+            }
+        }
+        return null;
+    }
+
     @Override
     public User[] getAll(){
         List<UserData> usersData = new ArrayList<>();

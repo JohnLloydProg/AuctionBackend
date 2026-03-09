@@ -3,7 +3,9 @@ package com.payaman.auctms.serviceimpl;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payaman.auctms.entity.UserData;
+import com.payaman.auctms.model.User;
 import com.payaman.auctms.repository.UserDataRepository;
+import com.payaman.auctms.service.UserConsumerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,38 +16,26 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserConsumerServiceImpl implements com.payaman.auctms.service.UserConsumerService {
+public class UserConsumerServiceImpl implements UserConsumerService {
 
     private final UserDataRepository userRepository;
     private final ObjectMapper objectMapper;
 
     @Override
     @Transactional
-    public void consumeUser(String message) {
+    public void consumeUser(User user) {
         try {
-            JsonNode rootNode = objectMapper.readTree(message);
+            UserData userData = new UserData();
+            userData.setUserId(user.getUserId());
 
-            String extractedUsername = rootNode.path("username").asText(null);
-            String extractedEmail = rootNode.path("email").asText(null);
+            userData.setUsername(user.getUsername());
+            userData.setEmail(user.getEmail());
 
-            if (extractedUsername == null || extractedEmail == null) {
-                log.warn("Skipping message: Missing username or email.");
-                return;
-            }
+            userData.setPasswordHash("TEMP_HASH_123");
+            userData.setRole("BUYER");
+            userData.setStatus("ACTIVE");
 
-            UserData user = new UserData();
-            user.setUserId(UUID.randomUUID().toString());
-
-            user.setUsername(extractedUsername);
-            user.setEmail(extractedEmail);
-
-            user.setPasswordHash("TEMP_HASH_123");
-            user.setRole("BUYER");
-            user.setStatus("ACTIVE");
-
-            userRepository.save(user);
-            log.info("Service: Saved User [User: {}, Email: {}]", extractedUsername, extractedEmail);
-
+            userRepository.save(userData);
         } catch (Exception e) {
             log.error("Service Error processing user: {}", e.getMessage());
         }
