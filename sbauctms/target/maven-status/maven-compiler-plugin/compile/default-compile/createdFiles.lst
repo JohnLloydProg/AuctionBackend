@@ -1,0 +1,4 @@
+com\payaman\auctms\kafka\AuctionListener.class
+com\payaman\auctms\serviceimpl\AuctionServiceImpl.class
+com\payaman\auctms\AuctionMSApplication.class
+com\payaman\auctms\controller\AuctionController.class
