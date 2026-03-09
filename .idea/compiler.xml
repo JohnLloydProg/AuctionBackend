@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="sbauctms" />
+        <module name="userdata" />
         <module name="auctdata" />
+        <module name="sbauctms" />
+        <module name="sbuserms" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +21,8 @@
       <module name="auctdata" options="-parameters" />
       <module name="auctms" options="-parameters" />
       <module name="sbauctms" options="-parameters" />
+      <module name="sbuserms" options="-parameters" />
+      <module name="userdata" options="-parameters" />
     </option>
   </component>
 </project>
