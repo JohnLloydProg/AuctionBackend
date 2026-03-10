@@ -10,6 +10,7 @@ import com.payaman.auctms.repository.AuctionDataRepository;
 import com.payaman.auctms.repository.BidDataRepository;
 import com.payaman.auctms.service.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,14 +18,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+@Service
 public class BidServiceImpl implements BidService {
     Logger logger = Logger.getLogger("Bid Service");
 
     @Autowired
     BidDataRepository bidDataRepository;
-
-    @Autowired
-    AuctionDataRepository auctionDataRepository;
 
     public BidRequest transform(BidData bidData) {
         BidRequest bidRequest = new BidRequest();

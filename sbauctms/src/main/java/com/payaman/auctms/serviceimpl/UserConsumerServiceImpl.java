@@ -31,9 +31,9 @@ public class UserConsumerServiceImpl implements UserConsumerService {
             userData.setUsername(user.getUsername());
             userData.setEmail(user.getEmail());
 
-            userData.setPasswordHash("TEMP_HASH_123");
-            userData.setRole("BUYER");
-            userData.setStatus("ACTIVE");
+            userData.setPasswordHash(user.getPasswordHash());
+            userData.setRole(user.getRole());
+            userData.setStatus(user.getStatus());
 
             userRepository.save(userData);
         } catch (Exception e) {

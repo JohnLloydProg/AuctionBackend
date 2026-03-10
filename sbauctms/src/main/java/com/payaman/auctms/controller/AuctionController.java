@@ -2,6 +2,7 @@ package com.payaman.auctms.controller;
 import com.payaman.auctms.model.Auction;
 import com.payaman.auctms.model.BidRequest;
 import com.payaman.auctms.service.AuctionService;
+import com.payaman.auctms.service.BidService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class AuctionController {
 	Logger logger = LoggerFactory.getLogger( AuctionController.class);
 	@Autowired
 	private AuctionService auctionService;
+
+	@Autowired
+	private BidService bidService;
 
 	@GetMapping
 	public ResponseEntity<?> listAuction()
@@ -54,13 +58,20 @@ public class AuctionController {
 		HttpHeaders headers = new HttpHeaders();
 		ResponseEntity<?> response;
 		try {
+			BidRequest newBidRequest = bidService.create(bidRequest);
 			Auction auction = auctionService.get(id);
-			if (bidRequest.getOfferedPrice() > auction.getCurrentBid().getOfferedPrice()) {
-				auction.setCurrentBid(bidRequest);
+			if (auction.getCurrentBid() == null) {
+				auction.setCurrentBid(newBidRequest);
 				auctionService.update(auction);
 				response = ResponseEntity.ok().headers(headers).body("Successful bid");
 			}else {
-				response = ResponseEntity.status(HttpStatus.CONFLICT).body("Offered price is not high enough");
+				if (bidRequest.getOfferedPrice() > auction.getCurrentBid().getOfferedPrice()) {
+					auction.setCurrentBid(newBidRequest);
+					auctionService.update(auction);
+					response = ResponseEntity.ok().headers(headers).body("Successful bid");
+				} else {
+					response = ResponseEntity.status(HttpStatus.CONFLICT).body("Offered price is not high enough");
+				}
 			}
 		}catch (Exception ex) {
 			logger.error("Failed to retrieve auction with id : {}", ex.getMessage(), ex);

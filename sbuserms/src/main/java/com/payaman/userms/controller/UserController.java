@@ -52,11 +52,11 @@ public class UserController {
     }
 
     @PostMapping("api/login")
-    public ResponseEntity<?> add(@RequestBody String email, @RequestBody String password){
+    public ResponseEntity<?> login(@RequestBody User user){
         HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try{
-            User newUser = userService.login(email, password);
+            User newUser = userService.login(user.getEmail(), user.getPasswordHash());
             response = ResponseEntity.ok(newUser);
         } catch (Exception ex){
             logger.error("Failed to retrieve user with id : {}", ex.getMessage(), ex);
@@ -87,7 +87,11 @@ public class UserController {
         ResponseEntity<?> response;
         try{
             User user = userService.get(id);
-            response = ResponseEntity.ok(user);
+            if (user != null) {
+                response = ResponseEntity.ok(user);
+            }else {
+                response = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong password");
+            }
         } catch (Exception ex){
             response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }

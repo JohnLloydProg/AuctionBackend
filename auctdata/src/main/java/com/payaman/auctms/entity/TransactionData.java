@@ -11,6 +11,7 @@ import java.util.Date;
 public class TransactionData {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private int auctionId;

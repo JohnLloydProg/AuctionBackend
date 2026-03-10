@@ -5,7 +5,7 @@ spring:
    datasource: 
       url: jdbc:mysql://localhost:3306/userdb?allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&useSSL=false
       username: root
-      password: lloyd0927
+      password: password
       driver-class-name: com.mysql.cj.jdbc.Driver
    jpa: 
       show-sql: true
@@ -27,6 +27,10 @@ spring:
       multipart: 
          enabled: true
          location: upload
+   kafka:
+      producer:
+         key-serializer: org.apache.kafka.common.serialization.StringSerializer
+         value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 file: 
    upload: 
       location: ..\\upload-dir

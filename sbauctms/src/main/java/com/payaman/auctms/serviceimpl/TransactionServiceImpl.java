@@ -113,18 +113,31 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction[] getAll() throws Exception {
+    public Transaction[] getAll(Integer userId) throws Exception {
         List<TransactionData> transactionDataList = new ArrayList<>();
         List<Transaction> transactionList = new ArrayList<>();
         transactionDataRepository.findAll().forEach(transactionDataList::add);
         Iterator<TransactionData> it = transactionDataList.iterator();
         while(it.hasNext()) {
-            transactionList.add(this.transform(it.next()));
+            TransactionData transactionData = it.next();
+            if (transactionData.getBuyerId() == userId) {
+                transactionList.add(this.transform(transactionData));
+            }
         }
         Transaction[] array = new Transaction[transactionList.size()];
         for  (int i = 0; i< transactionList.size(); i++){
             array[i] = transactionList.get(i);
         }
         return array;
+    }
+
+    @Override
+    public Transaction update(Transaction transaction) throws Exception {
+        Optional<TransactionData> optionalTransactionData = transactionDataRepository.findById(transaction.getId());
+        if (optionalTransactionData.isPresent()) {
+            TransactionData newTransaction = transactionDataRepository.save(transform(transaction));
+            return transform(newTransaction);
+        }
+        return transaction;
     }
 }

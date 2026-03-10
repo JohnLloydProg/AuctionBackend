@@ -1,6 +1,4 @@
 com\payaman\userms\controller\UserController.class
-com\payaman\userms\UserMSApplication.class
-com\payaman\userms\serviceimpl\UserConsumerServiceImpl.class
-com\payaman\userms\kafka\UserProducer.class
 com\payaman\userms\serviceimpl\UserServiceImpl.class
-com\payaman\userms\kafka\UserListener.class
+com\payaman\userms\UserMSApplication.class
+com\payaman\userms\kafka\UserProducer.class

@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService{
     public User update(User user){
         User updatedUser = null;
         int id = user.getUserId();
-        Optional<UserData> optional  = userDataRepository.findById(Integer.toString(id));
+        Optional<UserData> optional  = userDataRepository.findById(id);
         if (optional.isPresent()){
             UserData originalUserData = this.transform(user);
             originalUserData.setCreatedAt(optional.get().getCreatedAt());
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService{
     public User get(Integer id){
         logger.info(" Input id >>" + Integer.toString(id));
         User user = null;
-        Optional<UserData> optional = userDataRepository.findById(Integer.toString(id));
+        Optional<UserData> optional = userDataRepository.findById(id);
         if(optional.isPresent()){
             logger.info(" Is present >> ");
             user = this.transform(optional.get());
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService{
     public void delete(Integer id){
         User user = null;
         logger.info(" Input >> " + Integer.toString(id));
-        Optional<UserData> optional = userDataRepository.findById(Integer.toString(id));
+        Optional<UserData> optional = userDataRepository.findById(id);
         if(optional.isPresent()){
             UserData userDatum = optional.get();
             userDataRepository.delete(optional.get());

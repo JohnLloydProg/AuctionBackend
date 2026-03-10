@@ -129,9 +129,7 @@ public class AuctionServiceImpl implements AuctionService {
 		int id = auction.getId();
 		Optional<AuctionData> optional  = auctionDataRepository.findById(auction.getId());
 		if(optional.isPresent()){
-			AuctionData originalAuctionData = this.transform(auction);
-			originalAuctionData.setCreated(optional.get().getCreated());
-			AuctionData auctionData = auctionDataRepository.save(originalAuctionData);
+			AuctionData auctionData = auctionDataRepository.save(transform(auction));
 			updatedAuction = this.transform(auctionData);
 		}
 		else {
